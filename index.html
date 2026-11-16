@@ -1,15 +1,257 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>No Frills Media Organizer — Legal</title>
+<title>No Frills Media Organizer — find duplicate photos &amp; videos, organize everything. 100% offline.</title>
+<meta name="description" content="Windows app that finds duplicate and similar photos & videos across all your drives, then organizes them into one clean library. Approve-first safety, full undo, 100% offline. $2.99 one-time on the Microsoft Store.">
+<meta property="og:title" content="No Frills Media Organizer">
+<meta property="og:description" content="Find duplicate photos & videos across every drive. Approve-first, full undo, 100% offline. $2.99 one-time.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="icon.png">
 <style>
-body {{ font-family: -apple-system, "Segoe UI", Roboto, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 20px; line-height: 1.65; color: #222; }}
-a {{ color: #123cba; }}
-</style></head><body>
-<h1>No Frills Media Organizer — Legal Documents</h1>
-<ul>
-<li><a href="privacy.html">Privacy Policy</a></li>
-<li><a href="terms.html">Terms &amp; Conditions / EULA</a></li>
-</ul>
-<p>Support: <a href="mailto:hvygoose+mediasort@gmail.com">hvygoose+mediasort@gmail.com</a></p>
-</body></html>
+  :root{
+    --bg:#0a0f1a; --bg2:#0e1524; --card:#121c30; --line:#22304d;
+    --text:#e8eef8; --muted:#93a4bd; --accent:#4f8cff; --accent2:#2f6bd8;
+    --good:#3ecf8e; --radius:16px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:var(--bg); color:var(--text);
+    font-family:-apple-system,"Segoe UI",Roboto,Inter,sans-serif; line-height:1.6;}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  img{max-width:100%; display:block}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px}
+
+  /* nav */
+  nav{position:sticky; top:0; z-index:10; background:rgba(10,15,26,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex; align-items:center; gap:12px; padding:12px 20px}
+  nav img{width:34px; height:34px; border-radius:8px}
+  nav .name{font-weight:700; font-size:1.05rem}
+  nav .spacer{flex:1}
+
+  .btn{display:inline-block; background:var(--accent); color:#fff !important; font-weight:700;
+    padding:12px 22px; border-radius:10px; text-decoration:none !important; transition:background .15s;}
+  .btn:hover{background:var(--accent2)}
+  .btn.big{padding:16px 30px; font-size:1.1rem}
+  .btn.ghost{background:transparent; border:1px solid var(--line); color:var(--text) !important}
+  .btn.ghost:hover{border-color:var(--accent)}
+
+  /* hero */
+  .hero{padding:64px 0 40px; text-align:center}
+  .pill{display:inline-block; font-size:.85rem; font-weight:600; color:var(--good);
+    border:1px solid rgba(62,207,142,.4); border-radius:999px; padding:4px 14px; margin-bottom:20px}
+  h1{font-size:clamp(1.9rem,4.5vw,3rem); line-height:1.15; margin-bottom:16px}
+  h1 .hl{color:var(--accent)}
+  .hero p.sub{font-size:1.15rem; color:var(--muted); max-width:640px; margin:0 auto 28px}
+  .chips{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:24px}
+  .chip{background:var(--card); border:1px solid var(--line); border-radius:999px;
+    padding:6px 16px; font-size:.9rem; color:var(--muted)}
+  .hero-shot{margin:44px auto 0; border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.5)}
+
+  /* stats */
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin:48px 0}
+  .stat{background:var(--bg2); border:1px solid var(--line); border-radius:var(--radius); padding:20px; text-align:center}
+  .stat .num{font-size:1.7rem; font-weight:800; color:var(--accent)}
+  .stat .lbl{font-size:.9rem; color:var(--muted); margin-top:4px}
+
+  section{padding:36px 0}
+  h2{font-size:1.6rem; margin-bottom:8px}
+  .lead{color:var(--muted); margin-bottom:28px}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px}
+  .card h3{font-size:1.05rem; margin-bottom:6px}
+  .card p{font-size:.95rem; color:var(--muted)}
+  .card .em{font-size:1.4rem; margin-bottom:10px; display:block}
+
+  /* steps */
+  .steps{counter-reset:s; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
+  .step{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px; position:relative}
+  .step::before{counter-increment:s; content:counter(s); display:inline-flex; align-items:center; justify-content:center;
+    width:30px; height:30px; border-radius:50%; background:var(--accent); color:#fff; font-weight:800; margin-bottom:12px}
+  .step h3{font-size:1rem; margin-bottom:6px}
+  .step p{font-size:.92rem; color:var(--muted)}
+
+  /* gallery */
+  .shot{margin-bottom:28px}
+  .shot figure{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden}
+  .shot figcaption{padding:12px 16px; background:var(--bg2); color:var(--muted); font-size:.92rem; border-top:1px solid var(--line)}
+
+  /* faq */
+  details{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 20px; margin-bottom:12px}
+  summary{font-weight:700; cursor:pointer; list-style:none}
+  summary::before{content:"+ "; color:var(--accent); font-weight:800}
+  details[open] summary::before{content:"– "}
+  details p{margin-top:10px; color:var(--muted); font-size:.95rem}
+
+  footer{border-top:1px solid var(--line); margin-top:40px; padding:32px 0 48px; color:var(--muted); font-size:.9rem}
+  footer .wrap{display:flex; flex-wrap:wrap; gap:12px 28px; align-items:center}
+  footer img{width:28px; height:28px; border-radius:6px}
+  footer .right{margin-left:auto; display:flex; gap:20px}
+
+  .cta-final{text-align:center; padding:56px 0}
+  .price{font-size:.95rem; color:var(--muted); margin-top:14px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <img src="icon.png" alt="No Frills Media Organizer icon">
+    <span class="name">No Frills Media Organizer</span>
+    <span class="spacer"></span>
+    <a class="btn" href="https://apps.microsoft.com/detail/9PDQLTKJW8CP">Get it — $2.99</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="pill">New on the Microsoft Store</span>
+    <h1>Your photos are everywhere.<br><span class="hl">Duplicates are everywhere twice.</span></h1>
+    <p class="sub">Scan every drive and folder you choose, find exact duplicates <em>and</em> visually
+      similar photos, then organize everything into one clean, dated library — with your approval
+      on every single action.</p>
+    <a class="btn big" href="https://apps.microsoft.com/detail/9PDQLTKJW8CP">Download on the Microsoft Store</a>
+    <div class="chips">
+      <span class="chip">💻 Windows 10 &amp; 11</span>
+      <span class="chip">🔒 100% offline — files never leave your PC</span>
+      <span class="chip">🚫 No account, no subscription</span>
+      <span class="chip">↩️ Full undo</span>
+    </div>
+    <div class="hero-shot">
+      <img src="shots/hero-scan-setup.jpg" alt="Scan Setup — pick folders to scan, exclusions, and destination, with a space-reclaimed dashboard">
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="num">64,065</div><div class="lbl">media files in the real-world test library</div></div>
+    <div class="stat"><div class="num">892 GB</div><div class="lbl">scanned across 4 drives in one pass</div></div>
+    <div class="stat"><div class="num">185 GB</div><div class="lbl">of exact duplicates it found hiding there</div></div>
+    <div class="stat"><div class="num">10,000</div><div class="lbl">files moved and restored in the undo test</div></div>
+  </div>
+
+  <section>
+    <h2>Built to be trusted with your memories</h2>
+    <p class="lead">Most dedupe tools want you to trust a big red "auto-clean" button. This one never asks you to.</p>
+    <div class="grid">
+      <div class="card"><span class="em">🗂️</span><h3>Scan everything, anywhere</h3>
+        <p>Pick multiple drives and folders in one pass — internal, external, USB — and exclude any subfolders
+        you don't want touched.</p></div>
+      <div class="card"><span class="em">🔍</span><h3>Exact <em>and</em> similar detection</h3>
+        <p>Exact duplicates matched by full file-content hash, never by name. Visually similar photos grouped
+        with a match percentage so you can eyeball the near-misses.</p></div>
+      <div class="card"><span class="em">✋</span><h3>Approve-first, always</h3>
+        <p>Nothing moves and nothing deletes until you review the preview and say so. System files, hidden
+        files, and anything ambiguous goes to review — never to the trash.</p></div>
+      <div class="card"><span class="em">↩️</span><h3>Full undo</h3>
+        <p>Every organize run is logged as a batch. Changed your mind? One click puts every file right back
+        where it came from.</p></div>
+      <div class="card"><span class="em">🔒</span><h3>100% offline</h3>
+        <p>No account, no sign-in, no telemetry, no uploads. Your photos, file names, and folder structure
+        never leave your machine. Ever.</p></div>
+      <div class="card"><span class="em">☁️</span><h3>Cloud-aware</h3>
+        <p>Recognizes OneDrive, Dropbox, and Google Drive folders and leaves them alone by default — you
+        decide if and when they're included.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <p class="lead">Four steps between "where did all my drive space go" and a clean library.</p>
+    <div class="steps">
+      <div class="step"><h3>Pick what to scan</h3><p>Any mix of drives and folders, with exclusions. Run it overnight on big libraries — it chugs along in the background.</p></div>
+      <div class="step"><h3>Review the preview</h3><p>See exactly what would move and what would be cleaned, grouped and explained, before anything happens.</p></div>
+      <div class="step"><h3>Approve &amp; organize</h3><p>One click files everything into a tidy year/month library. Duplicates and look-alikes wait for your call.</p></div>
+      <div class="step"><h3>Undo anytime</h3><p>The operation log remembers every batch. Restore everything, even days later.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>See it in action</h2>
+    <p class="lead">Real screens from the real app — no mockups.</p>
+
+    <div class="shot"><figure>
+      <img src="shots/shot1-preview.jpg" alt="Preview and Approval dashboard showing media found, safe to move, exact duplicates and review counts">
+      <figcaption>Every scan ends in a dashboard: what was found, what's safe to move, what needs your eyes.</figcaption>
+    </figure></div>
+
+    <div class="shot"><figure>
+      <img src="shots/shot2-choose.jpg" alt="Choose what gets moved — folder checklist and file-by-file preview with dates and destinations">
+      <figcaption>Choose exactly which folders move. Unchecked folders stay exactly where they are.</figcaption>
+    </figure></div>
+
+    <div class="shot"><figure>
+      <img src="shots/shot3-confirm.jpg" alt="Confirmation dialog: Run organization? Files will be moved — this can be undone">
+      <figcaption>One last confirmation before anything happens — with a reminder that moves can be undone.</figcaption>
+    </figure></div>
+
+    <div class="shot"><figure>
+      <img src="shots/shot4-similar.jpg" alt="Secondary review queue with similar photo sets and match percentages">
+      <figcaption>Look-alike photos grouped with match percentages. The app suggests a keeper; you decide.</figcaption>
+    </figure></div>
+
+    <div class="shot"><figure>
+      <img src="shots/shot5-compare.jpg" alt="Side-by-side comparison view explaining why two photos match">
+      <figcaption>Compare any pair side-by-side — and see the actual reasons it was flagged.</figcaption>
+    </figure></div>
+
+    <div class="shot"><figure>
+      <img src="shots/shot6-oplog.jpg" alt="Operation log and audit report with moved, deleted, skipped and undone counts">
+      <figcaption>A complete audit log of everything the app did — and the undo button that reverses it.</figcaption>
+    </figure></div>
+  </section>
+
+  <section>
+    <h2>Questions, answered</h2>
+    <p class="lead">The short version: it never does anything behind your back.</p>
+
+    <details><summary>Does it upload my photos anywhere?</summary>
+      <p>No. The app makes no network connections for your media at all — no cloud analysis, no accounts,
+      no telemetry. Everything is hashed and compared on your own PC. Our <a href="privacy.html">privacy policy</a>
+      is one page and says exactly that.</p></details>
+
+    <details><summary>Will it delete things automatically?</summary>
+      <p>Never. Exact duplicates are matched by content hash and shown to you. Similar photos are <em>never</em>
+      auto-deleted — they go to a review queue with a suggested keeper. Deletions only happen when you
+      explicitly approve them, and the app marks clearly which actions are permanent.</p></details>
+
+    <details><summary>What about OneDrive / Dropbox / Google Drive folders?</summary>
+      <p>Cloud-synced folders are recognized and excluded by default, so the app won't fight your cloud
+      sync. You can explicitly opt a cloud folder in if you want it scanned.</p></details>
+
+    <details><summary>Can it handle a really big library?</summary>
+      <p>Yes — it was built and tested on a 64,000-file, 892 GB library spread across four drives
+      (including two USB externals). Scans run in the background; big ones can run overnight.
+      Scan results are saved, so you can close the app mid-review and pick up where you left off.</p></details>
+
+    <details><summary>What does it run on? What does it cost?</summary>
+      <p>Windows 10 and 11, 64-bit. $2.99, one time, from the Microsoft Store. No subscription,
+      no in-app upsells, no "pro tier."</p></details>
+  </section>
+
+  <section class="cta-final">
+    <h2>Clean library. Zero trust issues. Three bucks.</h2>
+    <p class="lead" style="margin:10px 0 26px">Built by someone who needed it — tested on his own 185 GB of duplicates.</p>
+    <a class="btn big" href="https://apps.microsoft.com/detail/9PDQLTKJW8CP">Get No Frills Media Organizer</a>
+    <p class="price">$2.99 one-time · Microsoft Store · Windows 10/11</p>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <img src="icon.png" alt="">
+    <span>© 2026 Ganso Gordo Producciones</span>
+    <span class="right">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="mailto:hvygoose+mediasort@gmail.com">Support</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
