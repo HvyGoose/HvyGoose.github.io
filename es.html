@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ganso Gordo Producciones — Apps, Shows en Vivo y Clases en la Ribera de Chapala</title>
+<meta name="description" content="Ganso Gordo Producciones: apps honestas para Windows y Android, noches de trivia y karaoke cada semana, animación de eventos, desarrollo de apps a la medida y clases particulares. Ribera de Chapala, Jalisco.">
+<link rel="icon" type="image/png" href="media-organizer/icon.png">
+<style>
+  :root{
+    --bg:#0a0f1a; --bg2:#0e1524; --card:#121c30; --line:#22304d;
+    --text:#e8eef8; --muted:#93a4bd; --accent:#4f8cff; --accent2:#2f6bd8;
+    --good:#3ecf8e; --gold:#e8b64c; --radius:16px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:var(--bg); color:var(--text);
+    font-family:-apple-system,"Segoe UI",Roboto,Inter,sans-serif; line-height:1.6;}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  img{max-width:100%}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px}
+
+  nav{position:sticky; top:0; z-index:10; background:rgba(10,15,26,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex; align-items:center; gap:14px; padding:12px 20px; flex-wrap:wrap}
+  nav .name{font-weight:800; font-size:1.05rem}
+  nav .goose{font-size:1.3rem}
+  nav .links{display:flex; gap:18px; margin-left:auto; align-items:center; font-size:.95rem}
+  nav .links a{color:var(--text)}
+  .langbtn{background:var(--card); border:1px solid var(--gold); color:var(--gold) !important;
+    font-weight:700; padding:7px 16px; border-radius:999px; text-decoration:none !important; white-space:nowrap}
+  .langbtn:hover{background:rgba(232,182,76,.12)}
+
+  .hero{padding:64px 0 44px; text-align:center}
+  .hero .goose-big{font-size:3rem}
+  h1{font-size:clamp(2rem,5vw,3.2rem); line-height:1.12; margin:10px 0 14px}
+  h1 .hl{color:var(--gold)}
+  .hero p.sub{font-size:1.15rem; color:var(--muted); max-width:660px; margin:0 auto}
+
+  section{padding:40px 0}
+  h2{font-size:1.65rem; margin-bottom:6px}
+  h2 .em{margin-right:8px}
+  .lead{color:var(--muted); margin-bottom:26px}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:16px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px;
+    display:flex; flex-direction:column}
+  .card h3{font-size:1.12rem; margin-bottom:6px}
+  .card p{font-size:.95rem; color:var(--muted); flex:1}
+  .card .tag{display:inline-block; font-size:.78rem; font-weight:700; border-radius:999px; padding:3px 12px; margin-bottom:12px; width:max-content}
+  .tag.live{background:rgba(62,207,142,.15); color:var(--good); border:1px solid rgba(62,207,142,.4)}
+  .tag.soon{background:rgba(232,182,76,.12); color:var(--gold); border:1px solid rgba(232,182,76,.4)}
+  .tag.dev{background:rgba(79,140,255,.12); color:var(--accent); border:1px solid rgba(79,140,255,.4)}
+  .card .cta{margin-top:16px}
+  .btn{display:inline-block; background:var(--accent); color:#fff !important; font-weight:700;
+    padding:11px 20px; border-radius:10px; text-decoration:none !important}
+  .btn:hover{background:var(--accent2)}
+  .btn.ghost{background:transparent; border:1px solid var(--line); color:var(--text) !important}
+  .btn.ghost:hover{border-color:var(--accent)}
+
+  .price{color:var(--text); font-weight:700}
+  .fine{font-size:.85rem; color:var(--muted)}
+
+  footer{border-top:1px solid var(--line); margin-top:44px; padding:32px 0 48px; color:var(--muted); font-size:.9rem}
+  footer .wrap{display:flex; flex-wrap:wrap; gap:10px 26px; align-items:center}
+  footer .right{margin-left:auto; display:flex; gap:20px; flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="goose">🪿</span>
+    <span class="name">Ganso Gordo Producciones</span>
+    <div class="links">
+      <a href="#apps">Apps</a>
+      <a href="#shows">Shows en Vivo</a>
+      <a href="#hire">Contrátame</a>
+      <a href="#learn">Aprende</a>
+      <a class="langbtn" href="index.html" onclick="localStorage.setItem('ggp-lang','en')">🇺🇸 English</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="goose-big">🪿</div>
+    <h1>Software, shows y saberes.<br><span class="hl">Un ganso gordo que lo hace todo.</span></h1>
+    <p class="sub">Ganso Gordo Producciones crea apps honestas y sin suscripciones, anima las mejores
+      noches de trivia y karaoke de la Ribera, y le enseña a quien quiera aprender — en español
+      o in English.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="apps">
+    <h2><span class="em">📱</span>Apps</h2>
+    <p class="lead">Software útil, a precio justo. Sin suscripciones, sin cuentas, sin rodeos.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="tag live">● DISPONIBLE — Microsoft Store</span>
+        <h3>No Frills Media Organizer</h3>
+        <p>Encuentra fotos y videos duplicados en todos tus discos y organiza todo en una sola
+          biblioteca limpia. 100% sin conexión, tú apruebas cada acción, con deshacer total.
+          Windows 10/11. $2.99 USD, pago único.</p>
+        <div class="cta">
+          <a class="btn" href="media-organizer/">Más información</a>
+          <a class="btn ghost" href="https://apps.microsoft.com/detail/9PDQLTKJW8CP">Obtenerla</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag live">● DISPONIBLE — Microsoft Store</span>
+        <span class="tag soon" style="margin-left:6px">● EN PRUEBAS — Google Play</span>
+        <h3>No Frills Translator</h3>
+        <p>Traducción por voz inglés ↔ español, sin complicaciones. Ya disponible en la Microsoft
+          Store; en pruebas cerradas de Google Play — lanzamiento público a finales de noviembre de 2026.</p>
+        <div class="cta">
+          <a class="btn" href="https://apps.microsoft.com/detail/9p3dnx3n67xf">Disponible en MS Store</a>
+          <a class="btn ghost" href="https://nofrillstranslator.com">nofrillstranslator.com</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag dev">● EN DESARROLLO</span>
+        <h3>Drop Zone</h3>
+        <p>Suelta tus archivos en una caja y la máquina los pone en su lugar — organización
+          automática antes de que exista el desorden. Muy pronto.</p>
+        <div class="cta"><span class="fine">Esta sección crece — vuelve pronto.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="shows">
+    <h2><span class="em">🎤</span>Shows en vivo cada semana</h2>
+    <p class="lead">Ven a jugar, ven a cantar. Todos son bienvenidos — trae tu equipo o únete a uno.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>🧠 Martes de Trivia</h3>
+        <p>50 preguntas, cinco rondas y el honor en juego. Todos los martes en el
+          <strong>Iron Horse</strong>, Ribera de Chapala. <span class="fine">(Los horarios exactos
+          se publican en el volante semanal — pronto también aquí.)</span></p>
+      </div>
+      <div class="card">
+        <h3>🎵 Jueves de Karaoke</h3>
+        <p>Miles de canciones, cero pena. Todos los jueves por la noche en la Ribera —
+          <span class="fine">el lugar y la hora se anuncian cada semana (volante próximamente aquí).</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hire">
+    <h2><span class="em">🤝</span>Contrátame</h2>
+    <p class="lead">Noches para restaurantes, fiestas privadas, eventos de empresa — o una app hecha
+      a tu medida. <strong>Todos los precios son negociables.</strong> Los tiempos están difíciles;
+      platícame y lo resolvemos.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>🎵 Noche de karaoke</h3>
+        <p>Equipo completo, catálogo enorme y un animador que mantiene a todos cantando.</p>
+        <p class="price" style="margin-top:10px">$1,000 MXN — 3 horas (mínimo)</p>
+        <p class="fine">Horas extra: $250 MXN/hora</p>
+      </div>
+      <div class="card">
+        <h3>🧠 Noche de trivia</h3>
+        <p>Un show de 50 preguntas de unas 2 horas — preguntas, hojas de respuestas, puntuación y
+          animación. Tú traes la gente, yo traigo el juego.</p>
+        <p class="price" style="margin-top:10px">$600 MXN precio fijo</p>
+      </div>
+      <div class="card">
+        <h3>🛠️ Apps y herramientas a la medida</h3>
+        <p>¿Necesitas una app o una herramienta y no sabes por dónde empezar? La diseño y la
+          construyo contigo — tú traes el problema, yo pongo la fábrica. Dos apps publicadas en
+          tiendas y contando.</p>
+        <p class="price" style="margin-top:10px">Platícame tu idea</p>
+      </div>
+    </div>
+    <p style="margin-top:22px"><a class="btn" href="mailto:hvygoose@gmail.com">Reserva o pregunta: hvygoose@gmail.com</a></p>
+  </section>
+
+  <section id="learn">
+    <h2><span class="em">📚</span>Aprende</h2>
+    <p class="lead">Clases particulares, en español o inglés, a tu ritmo.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>🎓 Todo lo que yo hago, tú lo puedes aprender</h3>
+        <p>¿Quieres animar tus propias noches de trivia o karaoke? ¿Crear una app con herramientas
+          de IA? ¿Organizar los archivos de toda una vida? ¿Dominar por fin tu propia computadora?
+          Si yo lo hago, te lo enseño — con paciencia, en palabras sencillas, en tu casa o por
+          videollamada.</p>
+        <p style="margin-top:10px"><a href="mailto:hvygoose@gmail.com">Dime qué quieres aprender →</a></p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ganso Gordo Producciones · Ribera de Chapala, Jalisco, México</span>
+    <span class="right">
+      <a href="privacy.html">Aviso de Privacidad</a>
+      <a href="terms.html">Términos</a>
+      <a href="mailto:hvygoose@gmail.com">Contacto</a>
+      <a href="index.html">English</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    try{ localStorage.setItem; }catch(e){}
+  })();
+</script>
+</body>
+</html>
